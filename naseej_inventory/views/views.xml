@@ -9,7 +9,6 @@
           <field name="show_reserved" position="after">
             <field name="internal_loc"/>
           </field>
-
           <field name="default_location_dest_id" position="after">
             <field name="internal_location" attrs="{'invisible':[('internal_loc','=',False)]}"/>
           </field>
