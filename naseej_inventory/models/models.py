@@ -51,16 +51,3 @@ class StockPicking(models.Model):
         pick.show_button_generate = False
         self.after_click_button_generate = False
         self.pack_picking_id = pick.id
-
-    # @api.multi
-    # def view_transfer(self):
-    #
-    #     action = self.env.ref('stock.action_picking_tree_all').read()[0]
-    #
-    #     # transfers = self.mapped('pack_picking_id')
-    #     # if len(transfers) > 1:
-    #     #     action['domain'] = [('id', 'in', transfers.ids)]
-    #     # elif transfers:
-    #     #     action['views'] = [(self.env.ref('stock.view_picking_form').id, 'form')]
-    #     #     action['res_id'] = transfers.id
-    #     return action
