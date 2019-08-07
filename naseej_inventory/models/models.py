@@ -7,7 +7,7 @@ class NaseejInventory(models.Model):
     _inherit = 'stock.picking.type'
 
     internal_loc = fields.Boolean('Is Internal?')
-    internal_location = fields.Many2one('stock.location', string='Internal Location')
+    internal_location = fields.Many2one('stock.location', string='Destination Transfer Location')
     internal_operation_type = fields.Many2one('stock.picking.type', string='Internal Operation Type')
 
 
@@ -24,16 +24,16 @@ class StockPicking(models.Model):
             if not pick.picking_type_id.internal_loc:
                 self.show_button_generate = False
 
-    @api.onchange('picking_type_id', 'partner_id')
-    def onchange_picking_type_id_inter(self):
-        for pick in self:
-            if pick.picking_type_id.internal_loc:
-                pick.location_dest_id = pick.picking_type_id.internal_location
+    # @api.onchange('picking_type_id', 'partner_id')
+    # def onchange_picking_type_id_inter(self):
+    #     for pick in self:
+    #         if pick.picking_type_id.internal_loc:
+    #             pick.location_dest_id = pick.picking_type_id.internal_location
 
     def generate_receipt_order(self):
         pick = self.copy()
         internal_picking_type = self.picking_type_id.internal_operation_type
-        pick_dest_location = self.picking_type_id.default_location_dest_id
+        pick_dest_location = self.picking_type_id.internal_location
         pick.write({'picking_type_id': internal_picking_type.id,
                     'location_id': self.location_dest_id.id,
                     'location_dest_id': pick_dest_location.id, })
