@@ -9,6 +9,7 @@
           <field name="show_reserved" position="after">
             <field name="internal_loc"/>
           </field>
+
           <field name="default_location_dest_id" position="after">
             <field name="internal_location" attrs="{'invisible':[('internal_loc','=',False)]}"/>
           </field>
@@ -27,12 +28,13 @@
             <field name="partner_id" position="after">
               <field name="show_button_generate" invisible="1"/>
                 <field name="after_click_button_generate" invisible="1"/>
+                <field name="check_operation_type" invisible="1"/>
             </field>
 
           <button name="action_cancel" position="after">
             <button name="generate_receipt_order" string="Generate Pack Picking" class="oe_highlight"
                     type="object"
-                    attrs="{'invisible':['|','|',('show_button_generate','=',False),('state','not in',('done')),('after_click_button_generate','=',False)]}"/>
+                    attrs="{'invisible':['|','|','|',('show_button_generate','=',False),('state','not in',('done')),('after_click_button_generate','=',False),('check_operation_type','=',False)]}"/>
           </button>
 
         </field>

@@ -17,6 +17,13 @@ class StockPicking(models.Model):
     pack_picking_id = fields.Many2one('stock.picking', 'Pack Picking')
     show_button_generate = fields.Boolean(string="show", default=True)
     after_click_button_generate = fields.Boolean(string="click", default=True)
+    check_operation_type = fields.Boolean(string="click", default=True)
+
+    @api.onchange('picking_type_id')
+    def _check_operation_type(self):
+        for pick in self:
+            if pick.picking_type_id.code != 'internal':
+                self.check_operation_type = False
 
     @api.onchange('picking_type_id')
     def show_generate_btn(self):
